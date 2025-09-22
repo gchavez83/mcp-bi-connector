@@ -1,22 +1,3 @@
-# Railway deployment
 uvicorn>=0.24.0
-
-# Azure Functions Dependencies
-azure-functions>=1.18.0
-azure-functions-worker>=1.0.0
-
-# MCP Server Dependencies
-mcp>=1.0.0
-fastmcp
-
-# Data processing libraries
-pandas>=2.0.0
-
-# HTTP requests for API communication
+fastapi>=0.104.0
 requests>=2.31.0
-
-# Keyring for secure token storage
-keyring>=23.0.1
-
-# Additional dependencies
-aiohttp>=3.8.0
