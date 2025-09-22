@@ -8,6 +8,12 @@ import time
 import base64
 from typing import Dict, Any
 
+# Agregar estas líneas al inicio de railway_app.py (después de los imports)
+import os
+print(f"CLIENT_ID: {os.environ.get('CLIENT_ID', 'NOT_FOUND')}")
+print(f"CLIENT_SECRET: {'***' if os.environ.get('CLIENT_SECRET') else 'NOT_FOUND'}")
+print(f"TENANT_ID: {os.environ.get('TENANT_ID', 'NOT_FOUND')}")
+
 app = FastAPI(title="Power BI MCP Server", version="1.0.0")
 
 # Add CORS middleware
@@ -410,4 +416,5 @@ async def root():
             "test": "/api/test (GET)"
         }
     }
-#endregion
+#endregion#   R a i l w a y   r e d e p l o y   t r i g g e r  
+ 
