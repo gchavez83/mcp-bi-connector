@@ -1,0 +1,165 @@
+{
+  "name": "Power BI MCP Custom Connector",
+  "description": "Custom connector para acceder a Power BI a través de MCP server",
+  "baseUrl": "https://tu-powerbi-mcp-app.azurewebsites.net/api",
+  "authentication": {
+    "type": "function_key",
+    "keyName": "code"
+  },
+  "operations": [
+    {
+      "name": "listWorkspaces",
+      "displayName": "List Power BI Workspaces",
+      "description": "Lista todos los workspaces de Power BI disponibles",
+      "method": "POST",
+      "endpoint": "/mcp-endpoint",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "body": {
+        "method": "call_tool",
+        "params": {
+          "name": "list_workspaces"
+        }
+      },
+      "responses": {
+        "200": {
+          "description": "Lista de workspaces",
+          "schema": {
+            "type": "object",
+            "properties": {
+              "content": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "type": {"type": "string"},
+                    "text": {"type": "string"}
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "listDatasets",
+      "displayName": "List Datasets in Workspace",
+      "description": "Lista todos los datasets en un workspace específico",
+      "method": "POST",
+      "endpoint": "/mcp-endpoint",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "parameters": [
+        {
+          "name": "workspaceId",
+          "type": "string",
+          "required": true,
+          "description": "ID del workspace"
+        }
+      ],
+      "body": {
+        "method": "call_tool",
+        "params": {
+          "name": "list_datasets",
+          "arguments": {
+            "workspace_id": "{workspaceId}"
+          }
+        }
+      }
+    },
+    {
+      "name": "getModelDefinition",
+      "displayName": "Get Model Definition",
+      "description": "Obtiene la definición completa TMDL de un modelo semántico",
+      "method": "POST",
+      "endpoint": "/mcp-endpoint",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "parameters": [
+        {
+          "name": "workspaceId",
+          "type": "string",
+          "required": true,
+          "description": "ID del workspace"
+        },
+        {
+          "name": "datasetId",
+          "type": "string",
+          "required": true,
+          "description": "ID del dataset"
+        }
+      ],
+      "body": {
+        "method": "call_tool",
+        "params": {
+          "name": "get_model_definition",
+          "arguments": {
+            "workspace_id": "{workspaceId}",
+            "dataset_id": "{datasetId}"
+          }
+        }
+      }
+    },
+    {
+      "name": "executeDaxQuery",
+      "displayName": "Execute DAX Query",
+      "description": "Ejecuta una consulta DAX contra un dataset de Power BI",
+      "method": "POST",
+      "endpoint": "/mcp-endpoint",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "parameters": [
+        {
+          "name": "workspaceId",
+          "type": "string",
+          "required": true,
+          "description": "ID del workspace"
+        },
+        {
+          "name": "datasetId",
+          "type": "string",
+          "required": true,
+          "description": "ID del dataset"
+        },
+        {
+          "name": "query",
+          "type": "string",
+          "required": true,
+          "description": "Consulta DAX a ejecutar"
+        }
+      ],
+      "body": {
+        "method": "call_tool",
+        "params": {
+          "name": "execute_dax_query",
+          "arguments": {
+            "workspace_id": "{workspaceId}",
+            "dataset_id": "{datasetId}",
+            "query": "{query}"
+          }
+        }
+      }
+    },
+    {
+      "name": "testConnection",
+      "displayName": "Test Power BI Connection",
+      "description": "Prueba la conexión con la API de Power BI",
+      "method": "POST",
+      "endpoint": "/mcp-endpoint",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "body": {
+        "method": "call_tool",
+        "params": {
+          "name": "test_connection"
+        }
+      }
+    }
+  ]
+}
