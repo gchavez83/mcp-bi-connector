@@ -1,8 +1,11 @@
+# Railway deployment
+uvicorn>=0.24.0
+
 # Azure Functions Dependencies
 azure-functions>=1.18.0
 azure-functions-worker>=1.0.0
 
-# MCP Server Dependencies (from your original requirements)
+# MCP Server Dependencies
 mcp>=1.0.0
 fastmcp
 
@@ -12,11 +15,8 @@ pandas>=2.0.0
 # HTTP requests for API communication
 requests>=2.31.0
 
-# Keyring for secure token storage (may not work in Azure Functions, pero lo mantenemos por compatibilidad)
+# Keyring for secure token storage
 keyring>=23.0.1
 
-# Additional dependencies that might be useful in Azure Functions
+# Additional dependencies
 aiohttp>=3.8.0
-
-# Note: pandas includes numpy as dependency, so we don't need to explicitly add it
-# Note: Standard library modules (asyncio, json, os, pathlib, time, base64) don't need to be listed
