@@ -284,6 +284,13 @@ async def test_powerbi_connection():
 async def mcp_endpoint(request: dict):
     """Main endpoint for MCP interactions"""
     try:
+        # LOGGING DETALLADO PARA DEBUGGING
+        print("="*50)
+        print("INCOMING REQUEST FROM COPILOT STUDIO:")
+        print(f"Request type: {type(request)}")
+        print(f"Request content: {json.dumps(request, indent=2)}")
+        print("="*50)
+
         method = request.get('method')
         
         if method == "list_tools":
